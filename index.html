@@ -46,6 +46,50 @@
 <li>Zber dát o návštevníkoch a jednotlivých návštevách webovej stranky.</li>
 <li>Clusterizácia návštevníkov webovej stránky.</li>
 <li>Zo získaných dát návštevníkom ponúkať produkty, o ktoré by mohli mať záujem.</li>
+
+  ====== Reco ======
+
+===== Cieľ =====
+Vytvorenie systému na automatické odporúčanie filmov zákazníkom webovej stránky, na základe ich doterajšieho chovania na rôznych webových stránkach.
+
+===== Naplň =====
+Zber a analýza dát o užívateľoch a ich chovaní na webových stránkach. Zber zahŕňa sledovanie užívateľov, zberanie dát o jednotlivých stránkach, ktoré navštívil na základe, ktorých sa budem snažiť čo najpresnejšie predpovedať jeho nasledovné chovanie. Práca s programovacím jazykom Scala, NoSQL databázami, Apache Spark...
+
+===== Osnova =====
+ 
+  - naštudovať materiály o projektoch, ktoré sa zaoberajú uchovávaním a spracovaním veľkých objemov dát
+  - prejsť si podobné projekty, ktoré sa zaoberajú mojou problematikou [[http://en.wikipedia.org/wiki/Recommender_system]], [[http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf]]
+  - Inštalácia web serveru, MongoDb
+  - Inštalácia Apache Spark
+
+Prečo NoSQL – NoSQL databázu som si vybral kvôli horizontálnemu škálovaniu výkonu, čo v praxi znamená že ak moja aplikácia bude v budúcnosti potrebovať väčší výkon, nebudem musieť kupovať silnejší stroj ale jednoducho pridám nove servery (nody). [[http://en.wikipedia.org/wiki/Scalability]], ďalej to bola jednoduchá obsluha a konfigurácia, či už sa jedná  o nastavovanie replík alebo stratu nejakého servera. [[http://docs.mongodb.org/manual/replication/]]. Rozhodoval som sa medzi NoSQL databázou Casandra a MongoDb. MongoDb som si vybral hlavne kvôli väčším skúsenostiam oproti Casandre, čo sa týka výkonu je porovnateľný s Casandrou. Čo nevylučuje, že v budúcnosti neprejdem na Casandru z výkonnostných dôvodov.
+
+Pre spracovanie logov som si vybral Apache Spark z dôvodu jeho výkonu s porovnaním s inými open-source riešeniami na trhu.(túto časť doplním do konca februára)
+
+ - Zbieranie logov :{{:sk:dcs:yp:reco:script.rar|}}
+   - Najväčším problémom pri zbieraní logov je jednoznačné identifikovanie užívateľa, kedže momentálne systém nedisponuje loginom, riešim tento problém prostredníctvom cookies. 
+ Momentálne môj systém dokáže zbierať informácie o užívateľovi, aké stránky navšťevuje na základe skriptu vloženého na stránke, ktorý otvori jednoduchý skript na stránke môjho webservra, ktorý buď vloži novo vygenerovaný cookies do počítača uživateľa alebo prečíta UID uživateľa, ktorý navštívil stránku. V budúcnosti chcem využit sofistikovanejšie cookies, ktoré nieje také jednoduché vymazať zo zariadenia.
+  
+  
+===== Plan do Budúcna =====
+   - dorobiť zber údajov
+   - naučiť sa pracovať s Apache Spark (hlavne streaming)
+   - navrhnúť model pre algoritmus
+   - implementácia algoritmu do prevádzky
+   - testovanie
+   - vylepšovanie algoritmu
+
+===== Data =====
+ - údaje, ktoré budem zbierať o každom uživatelovi, ktorý navštívi stránku:
+  - čas
+  - ip
+  - URL stránky (informacie o filme)
+  - OS
+  - prehliadač
+ 
+ - do môjho modelu by som chcel zahrnúť aj data o filmoch ako sú napríklad žáner, herci, režisér ...
+  
+  
 </ol>
 
 <p>Vedúci projektu: RNDr. Richard Ostertág email:ostertag[at]dcs.fmph.uniba.sk</p>
